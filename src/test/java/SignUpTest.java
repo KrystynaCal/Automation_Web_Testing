@@ -1,26 +1,14 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SignUpTest {
-
+public class SignUpTest extends BaseTest {
     @Test
-    public void SignUp() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-
+    public void SignUpTest() {
         String lastName = "Testowy";
         int randomNumber = (int) (Math.random()*1000);
         String email = "tester" + randomNumber + "@tester.pl";
@@ -37,18 +25,10 @@ public class SignUpTest {
 
         Assert.assertTrue(heading.getText().contains(lastName));
         Assert.assertEquals(heading.getText(), "Hi, Test Testowy");
+        driver.quit();
     }
     @Test
-    public void SignUpEmptyForm() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-
-        String lastName = "Testowy";
-        int randomNumber = (int) (Math.random()*1000);
-        String email = "tester" + randomNumber + "@tester.pl";
+    public void SignUpEmptyFormTest() {
         driver.findElements(By.xpath("//li[@id='li_myaccount']")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
         driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
@@ -66,12 +46,6 @@ public class SignUpTest {
     }
     @Test
     public void SignUpInvalidEmail() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-
         String lastName = "Testowy";
         int randomNumber = (int) (Math.random()*1000);
         String email = "tester" + randomNumber;
