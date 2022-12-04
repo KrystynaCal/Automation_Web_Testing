@@ -3,6 +3,6 @@ Automation testing website kurs-selenium.pl/demo/ using framework Selenium with 
 
 In this project I used:
 - knowledge of basic and more advanced techniques of creating test in Selenium
-- sPage Object Pattern 
+- Page Object Pattern 
 - TestNG, Maven and IntelliJ
 - basics of the Java programming language
