@@ -13,7 +13,7 @@ public class SignUpTest extends BaseTest {
     @Test
     public void SignUpTest() {
         String lastName = "Nowak";
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
         String email = "tester" + randomNumber + "@tester.pl";
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -33,6 +33,7 @@ public class SignUpTest extends BaseTest {
         Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Bartek Nowak");
         driver.quit();
     }
+
     @Test
     public void SignUpEmptyFormTest() {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -49,6 +50,7 @@ public class SignUpTest extends BaseTest {
         softAssert.assertTrue(errors.contains("The Last Name field is required."));
         softAssert.assertAll();
     }
+
     @Test
     public void SignUpInvalidEmail() {
 

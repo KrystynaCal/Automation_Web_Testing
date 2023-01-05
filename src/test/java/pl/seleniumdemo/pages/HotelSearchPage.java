@@ -12,28 +12,28 @@ import java.util.List;
 public class HotelSearchPage {
 
     @FindBy(xpath = "//span[text()='Search by Hotel or City Name']")
-        private  WebElement searchHotelSpan;
+    private WebElement searchHotelSpan;
 
     @FindBy(xpath = "//div[@id='select2-drop']//input")
-        private WebElement searchHotelInput;
+    private WebElement searchHotelInput;
 
     @FindBy(name = "checkin")
-            private WebElement checkinInput;
+    private WebElement checkinInput;
 
     @FindBy(name = "checkout")
-            private WebElement checkoutInput;
+    private WebElement checkoutInput;
 
     @FindBy(id = "travellersInput")
-            private WebElement travellersInput;
+    private WebElement travellersInput;
 
     @FindBy(id = "adultPlusBtn")
-            private  WebElement adultPlusBtn;
+    private WebElement adultPlusBtn;
 
     @FindBy(id = "childPlusBtn")
-            private WebElement childPlusBtn;
+    private WebElement childPlusBtn;
 
     @FindBy(xpath = "//button[text()=' Search']")
-            private WebElement searchButton;
+    private WebElement searchButton;
 
     @FindBy(xpath = "//li[@id='li_myaccount']")
     private List<WebElement> myAccountLink;
@@ -65,11 +65,13 @@ public class HotelSearchPage {
         addTraveler(adultPlusBtn, adultsToAdd);
         addTraveler(childPlusBtn, childToAdd);
     }
-    private void addTraveler (WebElement travelerBtn, int numberOfTravelers) {
-        for (int i=0; i< numberOfTravelers; i++){
+
+    private void addTraveler(WebElement travelerBtn, int numberOfTravelers) {
+        for (int i = 0; i < numberOfTravelers; i++) {
             travelerBtn.click();
         }
     }
+
     public void performSearch() {
         searchButton.click();
     }

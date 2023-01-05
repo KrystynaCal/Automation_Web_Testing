@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class SignUpPage {
 
     @FindBy(name = "firstname")
-            private WebElement firstNameInput;
+    private WebElement firstNameInput;
 
     @FindBy(name = "lastname")
     private WebElement lastNameInput;
@@ -29,12 +29,12 @@ public class SignUpPage {
     private WebElement confirmpasswordInput;
 
     @FindBy(xpath = "//button[text()=' Sign Up']")
-            private WebElement signUpButton;
+    private WebElement signUpButton;
 
     @FindBy(xpath = "//div[@class='alert alert-danger']//p")
     private List<WebElement> errors;
 
-    public SignUpPage (WebDriver driver) {
+    public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
@@ -46,27 +46,27 @@ public class SignUpPage {
         lastNameInput.sendKeys(lastName);
     }
 
-    public void  setPhone(String phone) {
+    public void setPhone(String phone) {
         phoneInput.sendKeys(phone);
     }
 
-    public void  setEmail(String email) {
+    public void setEmail(String email) {
         emailInput.sendKeys(email);
     }
 
-    public void  setPassword(String password) {
+    public void setPassword(String password) {
         passwordInput.sendKeys(password);
     }
 
-    public void  Confirmpassword(String confirmpassword) {
+    public void Confirmpassword(String confirmpassword) {
         confirmpasswordInput.sendKeys(confirmpassword);
     }
 
-    public void  signup() {
+    public void signup() {
         signUpButton.click();
     }
 
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         return errors.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());

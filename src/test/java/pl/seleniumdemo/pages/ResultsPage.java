@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ResultsPage {
 
     @FindBy(xpath = "//h4[contains(@class, 'list_title')]//b")
-            private List<WebElement> hotelList;
+    private List<WebElement> hotelList;
 
     @FindBy(xpath = "//div[@class='itemscontainer']//h2")
     public WebElement resultHeading;
@@ -21,11 +21,12 @@ public class ResultsPage {
     }
 
     public List<String> getHotelNames() {
-        return  hotelList.stream()
+        return hotelList.stream()
                 .map(e1 -> e1.getAttribute("textContent"))
                 .collect(Collectors.toList());
     }
-    public String getHeadingText(){
+
+    public String getHeadingText() {
         return resultHeading.getText();
     }
 }
