@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class SignUpPage {
 
     @FindBy(name = "firstname")
-            private WebElement firstNameInput;
+    private WebElement firstNameInput;
 
     @FindBy(name = "lastname")
     private WebElement lastNameInput;
@@ -29,46 +29,58 @@ public class SignUpPage {
     private WebElement confirmpasswordInput;
 
     @FindBy(xpath = "//button[text()=' Sign Up']")
-            private WebElement signUpButton;
+    private WebElement signUpButton;
 
     @FindBy(xpath = "//div[@class='alert alert-danger']//p")
     private List<WebElement> errors;
 
-    public SignUpPage (WebDriver driver) {
+    private WebDriver driver;
+
+    public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver = driver;
     }
 
-    public void setFirstName(String firstName) {
+    public SignUpPage setFirstName(String firstName) {
         firstNameInput.sendKeys(firstName);
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public SignUpPage setLastName(String lastName) {
         lastNameInput.sendKeys(lastName);
+        return this;
     }
 
-    public void  setPhone(String phone) {
+    public SignUpPage setPhone(String phone) {
         phoneInput.sendKeys(phone);
+        return this;
     }
 
-    public void  setEmail(String email) {
+    public SignUpPage setEmail(String email) {
         emailInput.sendKeys(email);
+        return this;
     }
 
-    public void  setPassword(String password) {
+    public SignUpPage setPassword(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void  Confirmpassword(String confirmpassword) {
+    public SignUpPage Confirmpassword(String confirmpassword) {
         confirmpasswordInput.sendKeys(confirmpassword);
+        return this;
     }
 
-    public void  signup() {
+    public LoggedUserPage signup() {
         signUpButton.click();
+        return new LoggedUserPage(driver);
     }
 
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         return errors.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
+
+
 }

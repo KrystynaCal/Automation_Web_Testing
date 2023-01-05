@@ -13,31 +13,28 @@ public class SignUpTest extends BaseTest {
     @Test
     public void SignUpTest() {
         String lastName = "Nowak";
-        int randomNumber = (int) (Math.random()*1000);
-        String email = "tester" + randomNumber + "@tester.pl";
+        int randomNumber = (int) (Math.random() * 1000);
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
+        LoggedUserPage loggedUserPage = new HotelSearchPage(driver)
+                .openSignUpForm()
+                .setFirstName("Bartek")
+                .setLastName("Nowak")
+                .setPhone("987656879")
+                .setEmail("tester" + randomNumber + "@tester.pl")
+                .setPassword("Test12345")
+                .Confirmpassword("Test12345")
+                .signup();
 
-        SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Bartek");
-        signUpPage.setLastName("Nowak");
-        signUpPage.setPhone("987656879");
-        signUpPage.setEmail(email);
-        signUpPage.setPassword("Test12345");
-        signUpPage.Confirmpassword("Test12345");
-        signUpPage.signup();
-
-        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastName));
         Assert.assertEquals(loggedUserPage.getHeadingText(), "Hi, Bartek Nowak");
         driver.quit();
     }
+
+
     @Test
     public void SignUpEmptyFormTest() {
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-        SignUpPage signUpPage = new SignUpPage(driver);
+        SignUpPage signUpPage = new HotelSearchPage(driver)
+                .openSignUpForm();
         signUpPage.signup();
 
         List<String> errors = signUpPage.getErrors();
@@ -49,20 +46,19 @@ public class SignUpTest extends BaseTest {
         softAssert.assertTrue(errors.contains("The Last Name field is required."));
         softAssert.assertAll();
     }
+
     @Test
     public void SignUpInvalidEmail() {
-
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-
-        SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Bartek");
-        signUpPage.setLastName("Testowy");
-        signUpPage.setPhone("987656879");
-        signUpPage.setEmail("email");
-        signUpPage.setPassword("Test12345");
-        signUpPage.Confirmpassword("Test12345");
+        SignUpPage signUpPage = new HotelSearchPage(driver)
+                .openSignUpForm()
+                .setFirstName("Bartek")
+                .setLastName("Testowy")
+                .setPhone("987656879")
+                .setEmail("email")
+                .setPassword("Test12345")
+                .Confirmpassword("Test12345");
         signUpPage.signup();
+
 
         Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
     }
